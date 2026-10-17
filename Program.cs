@@ -15,11 +15,18 @@ public static class Program
     {
         try
         {
+            // Layered transparent windows must render even on GPU/driver combinations
+            // where WPF hardware composition produces an entirely invisible surface.
+            RenderOptions.ProcessRenderMode=RenderMode.SoftwareOnly;
             if(args.Contains("--self-test")){SelfTest.Run(args);return;}
             if(args.Contains("--smoke-test")){SelfTest.Smoke(args[1]);return;}
-            using var mutex=new System.Threading.Mutex(true,"Local\\NeoControllerOverlay-Overlay",out bool first);if(!first)return;
+            using var mutex=new System.Threading.Mutex(true,"Local\\NeoControllerOverlay-Overlay",out bool first);
+            using var reveal=new System.Threading.EventWaitHandle(false,System.Threading.EventResetMode.AutoReset,"Local\\NeoControllerOverlay-Reveal");
+            if(!first){reveal.Set();return;}
             var app=new Application {ShutdownMode=ShutdownMode.OnExplicitShutdown};
-            var overlay=new Overlay();overlay.Show();app.Run();
+            var overlay=new Overlay();overlay.Show();overlay.Reveal();
+            var listener=System.Threading.ThreadPool.RegisterWaitForSingleObject(reveal,(_,_)=>app.Dispatcher.BeginInvoke(new Action(overlay.Reveal)),null,System.Threading.Timeout.Infinite,false);
+            try{app.Run();}finally{listener.Unregister(null);}
         }
         catch(Exception e){Settings.Log(e.ToString());Environment.ExitCode=1;}
     }
@@ -34,6 +41,8 @@ public sealed class Overlay : Window
     Hotkeys? hotkeys;IntPtr handle;readonly bool testing;public string ShortcutError="";
     [DllImport("user32.dll",EntryPoint="GetWindowLongW")] static extern int GetWindowLong(IntPtr h,int index);
     [DllImport("user32.dll",EntryPoint="SetWindowLongW")] static extern int SetWindowLong(IntPtr h,int index,int value);
+    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr hwnd,int command);
+    [DllImport("user32.dll")] static extern bool SetWindowPos(IntPtr hwnd,IntPtr insertAfter,int x,int y,int width,int height,uint flags);
     public Overlay(bool testing=false)
     {
         this.testing=testing;Config=testing?new Settings():Settings.Load();
@@ -60,6 +69,13 @@ public sealed class Overlay : Window
         bool visible=Forms.Screen.AllScreens.Any(s=>{var p=PresentationSource.FromVisual(this);double factor=p?.CompositionTarget.TransformFromDevice.M11??1;var b=s.WorkingArea;return r.IntersectsWith(new Rect(b.X*factor,b.Y*factor,b.Width*factor,b.Height*factor));});
         if(!visible)ResetPosition();
     }
+    public void Reveal()
+    {
+        if(!IsVisible)Show();Apply();EnsureVisible();
+        ShowWindow(handle,8);
+        SetWindowPos(handle,new IntPtr(-1),0,0,0,0,0x1|0x2|0x10|0x40);
+        View.InvalidateVisual();
+    }
     void ResetPosition(){Left=SystemParameters.WorkArea.Left+40;Top=SystemParameters.WorkArea.Top+40;Config.Scale=.65;Remember();}
     public void Act(string action)
     {
@@ -67,8 +83,8 @@ public sealed class Overlay : Window
         {
             case "Move left":Left-=10;break;case "Move right":Left+=10;break;case "Move up":Top-=10;break;case "Move down":Top+=10;break;
             case "Larger":Config.Scale+=.025;break;case "Smaller":Config.Scale-=.025;break;
-            case "Show / hide":if(IsVisible)Hide();else Show();break;
-            case "Reset position":ResetPosition();if(!IsVisible)Show();break;
+            case "Show / hide":if(IsVisible)Hide();else Reveal();break;
+            case "Reset position":ResetPosition();Reveal();break;
             case "Quit":Close();Application.Current.Shutdown();return;
         }
         Apply();Remember();

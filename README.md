@@ -24,7 +24,9 @@ There is no settings window, taskbar button, tray icon, status text, border, or 
 | Ctrl + Alt + R | Reset position and size |
 | Ctrl + Alt + X | Quit |
 
-Hold an arrow key, Q, or E to keep moving or resizing. Launching a second copy does nothing. Shortcuts are fixed, including when upgrading from an earlier Neo Controller Overlay version.
+Hold an arrow key, Q, or E to keep moving or resizing. Reopening the EXE restores the existing overlay if it is hidden or offscreen. Ctrl+Alt+R also restores it to the primary screen. Shortcuts are fixed, including when upgrading from an earlier Neo Controller Overlay version.
+
+Transparent rendering uses software composition for compatibility with graphics drivers that can otherwise leave a layered window invisible.
 
 ## Input and display
 

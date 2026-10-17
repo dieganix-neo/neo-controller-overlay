@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType><TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>disable</ImplicitUsings><Nullable>enable</Nullable>
-    <AssemblyName>NeoControllerOverlay</AssemblyName><Title>Neo Controller Overlay</Title><Product>Neo Controller Overlay</Product><Version>1.2.0</Version><ApplicationIcon>assets\NeoControllerOverlay.ico</ApplicationIcon>
+    <AssemblyName>NeoControllerOverlay</AssemblyName><AssemblyTitle>Neo Controller Overlay</AssemblyTitle><Product>Neo Controller Overlay</Product><Version>1.2.1</Version><ApplicationIcon>assets\NeoControllerOverlay.ico</ApplicationIcon>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier><SelfContained>true</SelfContained><PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract><DebugType>none</DebugType>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>

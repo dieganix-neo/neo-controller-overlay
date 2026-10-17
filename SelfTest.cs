@@ -16,7 +16,7 @@ public static class SelfTest
     {
         Directory.CreateDirectory(output);
         var app=new Application{ShutdownMode=ShutdownMode.OnExplicitShutdown};
-        var overlay=new Overlay(true);overlay.Show();
+        var overlay=new Overlay(true);overlay.Show();overlay.Reveal();
         var timer=new System.Windows.Threading.DispatcherTimer{Interval=TimeSpan.FromSeconds(1)};
         timer.Tick+=(_,_)=>{
             timer.Stop();var checks=new List<string>();
@@ -30,6 +30,12 @@ public static class SelfTest
                 checks.Add("PASS: All nine global shortcuts register with Windows");
                 double oldX=overlay.Left;overlay.Act("Move right");if(overlay.Left!=oldX+10)throw new Exception("Move action failed");checks.Add("PASS: Move shortcut action shifts overlay");
                 var hwnd=new WindowInteropHelper(overlay).Handle;
+                if(!IsWindowVisible(hwnd))throw new Exception("Native overlay window is hidden");
+                checks.Add("PASS: Native Windows visibility is enabled after startup");
+                overlay.Hide();overlay.Reveal();if(!overlay.IsVisible || !IsWindowVisible(hwnd))throw new Exception("Reveal did not restore hidden window");
+                checks.Add("PASS: Reveal restores a hidden overlay without opening another window");
+                overlay.Left=-100000;overlay.Top=-100000;overlay.Reveal();if(overlay.Left<0 || overlay.Top<0)throw new Exception("Offscreen overlay recovery failed");
+                checks.Add("PASS: Reveal recovers an overlay positioned offscreen");
                 double oldWidth=overlay.Width,oldScale=overlay.Config.Scale;
                 SendMessageW(hwnd,0x312,new IntPtr(105),IntPtr.Zero);if(overlay.Width<=oldWidth)throw new Exception("E hotkey action failed");
                 SendMessageW(hwnd,0x312,new IntPtr(104),IntPtr.Zero);if(Math.Abs(overlay.Config.Scale-oldScale)>.00001 || Math.Abs(overlay.Width-oldWidth)>1.5)throw new Exception("Q hotkey action failed");checks.Add("PASS: E enlarge and Q shrink route through the Windows hotkey message handler");
@@ -68,6 +74,7 @@ public static class SelfTest
     [DllImport("SDL3",CallingConvention=CallingConvention.Cdecl)] static extern void SDL_CloseJoystick(IntPtr joystick);
     [DllImport("user32.dll")] static extern int GetWindowLongW(IntPtr handle,int index);
     [DllImport("user32.dll")] static extern IntPtr SendMessageW(IntPtr hwnd,uint message,IntPtr wparam,IntPtr lparam);
+    [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr hwnd);
     public static void Run(string[] args)
     {
         string output=args.Length>1?args[1]:Path.Combine(Environment.CurrentDirectory,"test-results");Directory.CreateDirectory(output);
