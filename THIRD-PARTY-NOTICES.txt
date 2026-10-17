@@ -1,5 +1,5 @@
-PadGlass bundles SDL 3.4.18, copyright Sam Lantinga and contributors.
-PadGlass includes original controller skin artwork from https://gamepadviewer.com/.
+Neo Controller Overlay bundles SDL 3.4.18, copyright Sam Lantinga and contributors.
+Neo Controller Overlay includes original controller skin artwork from https://gamepadviewer.com/.
 Skin artwork belongs to its creators and is excluded from the app MIT license.
 Asset sources are documented in assets/skins/ATTRIBUTION.md in the repository.
 SDL is distributed under the zlib license; see SDL-LICENSE.txt.

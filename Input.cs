@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace PadGlass;
+namespace NeoControllerOverlay;
 
 public record PadInfo(uint Id, string Name, string Preset) { public override string ToString() => Name; }
 public sealed class PadState

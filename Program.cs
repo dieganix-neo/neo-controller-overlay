@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Forms=System.Windows.Forms;
 
-namespace PadGlass;
+namespace NeoControllerOverlay;
 
 public static class Program
 {
@@ -17,7 +17,7 @@ public static class Program
         {
             if(args.Contains("--self-test")){SelfTest.Run(args);return;}
             if(args.Contains("--smoke-test")){SelfTest.Smoke(args[1]);return;}
-            using var mutex=new System.Threading.Mutex(true,"Local\\PadGlass-Overlay",out bool first);if(!first)return;
+            using var mutex=new System.Threading.Mutex(true,"Local\\NeoControllerOverlay-Overlay",out bool first);if(!first)return;
             var app=new Application {ShutdownMode=ShutdownMode.OnExplicitShutdown};
             var overlay=new Overlay();overlay.Show();app.Run();
         }
@@ -37,7 +37,7 @@ public sealed class Overlay : Window
     public Overlay(bool testing=false)
     {
         this.testing=testing;Config=testing?new Settings():Settings.Load();
-        Title="PadGlass Overlay";WindowStyle=WindowStyle.None;AllowsTransparency=true;Background=Brushes.Transparent;
+        Title="Neo Controller Overlay";WindowStyle=WindowStyle.None;AllowsTransparency=true;Background=Brushes.Transparent;
         ResizeMode=ResizeMode.NoResize;Topmost=true;ShowInTaskbar=false;ShowActivated=false;Content=View;Left=Config.Left;Top=Config.Top;
         SourceInitialized+=(_,_)=>{
             handle=new WindowInteropHelper(this).Handle;hotkeys=new(handle,Act);ShortcutError=hotkeys.Apply(Settings.Defaults());

@@ -2,10 +2,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType><TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>disable</ImplicitUsings><Nullable>enable</Nullable>
-    <AssemblyName>PadGlass</AssemblyName><Version>1.1.0</Version><ApplicationIcon>assets\PadGlass.ico</ApplicationIcon>
+    <AssemblyName>NeoControllerOverlay</AssemblyName><Title>Neo Controller Overlay</Title><Product>Neo Controller Overlay</Product><Version>1.2.0</Version><ApplicationIcon>assets\NeoControllerOverlay.ico</ApplicationIcon>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier><SelfContained>true</SelfContained><PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract><DebugType>none</DebugType>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>
   <ItemGroup><Content Include="native\SDL3.dll" Link="SDL3.dll" CopyToOutputDirectory="PreserveNewest" /><Resource Include="assets\profile.png" /><Resource Include="assets\skins\**\*.png" /></ItemGroup>
 </Project>
+

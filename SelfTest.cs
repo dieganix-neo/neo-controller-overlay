@@ -8,7 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace PadGlass;
+namespace NeoControllerOverlay;
 
 public static class SelfTest
 {
@@ -86,7 +86,7 @@ public static class SelfTest
             Check(Settings.Defaults()["Smaller"]=="Ctrl+Alt+Q" && Settings.Defaults()["Larger"]=="Ctrl+Alt+E","Requested Q and E resize shortcuts are fixed defaults");
             foreach(var key in Settings.Defaults())Hotkeys.Parse(key.Value);checks.Add("PASS: All default shortcut expressions parse");
             using var input=new ControllerInput();input.Poll();checks.Add("PASS: SDL initializes and enumerates real hardware");
-            IntPtr name=Marshal.StringToCoTaskMemUTF8("PadGlass Virtual DualShock 4");
+            IntPtr name=Marshal.StringToCoTaskMemUTF8("Neo Controller Overlay Virtual DualShock 4");
             var desc=new VirtualDesc {Version=136,Type=1,Vendor=0x054c,Product=0x09cc,Axes=6,Buttons=26,ButtonMask=0x3ffffff,AxisMask=0x3f,Name=name};
             uint id=SDL_AttachVirtualJoystick(ref desc);Check(id!=0,"Virtual controller attaches through native SDL");
             var joy=SDL_OpenJoystick(id);Check(joy!=IntPtr.Zero,"Virtual joystick opens");

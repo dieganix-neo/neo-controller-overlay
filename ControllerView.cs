@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace PadGlass;
+namespace NeoControllerOverlay;
 
 // Positions and sprite regions follow Gamepad Viewer's published style.css.
 // Original skin art belongs to Gamepad Viewer; see assets/skins/ATTRIBUTION.md.
