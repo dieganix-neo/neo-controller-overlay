@@ -1,0 +1,3 @@
+Generated with the built-in OpenAI image generation tool.
+
+Use case: logo-brand. Create a polished square profile picture and Windows app icon for PadGlass, a transparent controller input overlay app. A bold centered stylized game controller formed from frosted glass with luminous mint accents, clearly readable silhouette, small directional cross and four circular buttons. Deep midnight navy rounded square backdrop. Minimal premium gaming utility aesthetic, crisp simple geometry, strong contrast at small sizes, centered generous margins. No text, no letters, no watermark.

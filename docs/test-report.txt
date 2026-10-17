@@ -1,0 +1,25 @@
+PASS: PS4 native type selects PS4 automatically
+PASS: PS5 native type selects PS5 automatically
+PASS: Xbox native type selects Xbox automatically
+PASS: Signed stick endpoints normalize correctly
+PASS: Radial deadzone suppresses drift
+PASS: Diagonal sticks clamp to circle
+PASS: Position and size settings serialize and restore
+PASS: Requested Q and E resize shortcuts are fixed defaults
+PASS: All default shortcut expressions parse
+PASS: SDL initializes and enumerates real hardware
+PASS: Virtual controller attaches through native SDL
+PASS: Virtual joystick opens
+PASS: Native virtual face button injection succeeds
+PASS: Native virtual stick injection succeeds
+PASS: Real polling path reads button and stick from SDL
+PASS: PS4 USB identity activates PS4 preset through SDL
+PASS: Button release and stick return are read
+PASS: PS4 artwork has transparent background
+PASS: PS5 artwork has transparent background
+PASS: Xbox artwork has transparent background
+PASS: Global shortcut registers with Windows
+PASS: Duplicate shortcuts are rejected
+PASS: Virtual controller detaches
+PASS: Disconnect polling completes without stale handle
+Physical USB/Bluetooth hardware and exclusive fullscreen behavior require hands-on testing.

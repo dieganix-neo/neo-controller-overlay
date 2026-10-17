@@ -1,0 +1,16 @@
+PadGlass bundles SDL 3.4.18, copyright Sam Lantinga and contributors.
+PadGlass includes original controller skin artwork from https://gamepadviewer.com/.
+Skin artwork belongs to its creators and is excluded from the app MIT license.
+Asset sources are documented in assets/skins/ATTRIBUTION.md in the repository.
+SDL is distributed under the zlib license; see SDL-LICENSE.txt.
+Official SDL binary: https://github.com/libsdl-org/SDL/releases/tag/release-3.4.18
+SDL3.dll SHA256: 2b4b128d8d510cc2d442693cf848c050d700d43dc667afe9e5fd82b0570d667e
+
+The self-contained executable bundles the Microsoft .NET 8 desktop runtime.
+.NET license: https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
+.NET third-party notices: https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT
+WPF license: https://github.com/dotnet/wpf/blob/main/LICENSE.TXT
+
+PlayStation, DualShock, DualSense, and Xbox names belong to their respective
+owners and identify compatible devices. This independent project is not
+affiliated with Sony, Microsoft, or Gamepad Viewer.

@@ -1,0 +1,9 @@
+PASS: Overlay starts transparent and always on top
+PASS: Only one window exists: the controller overlay
+PASS: All nine global shortcuts register with Windows
+PASS: Move shortcut action shifts overlay
+PASS: E enlarge and Q shrink route through the Windows hotkey message handler
+PASS: Click-through applies native Windows style
+PASS: Show and hide actions work
+PASS: Controller overlay renders while native input polling remains active
+Detected hardware: PS4 Controller
